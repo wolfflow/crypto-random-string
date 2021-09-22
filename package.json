@@ -1,9 +1,9 @@
 {
-	"name": "crypto-random-string",
-	"version": "3.3.1",
+	"name": "crypto-random-string-with-promisify-polyfill",
+	"version": "4.1.0",
 	"description": "Generate a cryptographically strong random string",
 	"license": "MIT",
-	"repository": "sindresorhus/crypto-random-string",
+	"repository": "wolfflow/crypto-random-string",
 	"author": {
 		"name": "Sindre Sorhus",
 		"email": "sindresorhus@gmail.com",

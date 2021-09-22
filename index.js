@@ -1,6 +1,13 @@
 'use strict';
-const {promisify} = require('util');
 const crypto = require('crypto');
+
+function promisify(fun) {
+	return function (...args) {
+		return new Promise((resolve, reject) => {
+			fun.apply(fun, [...args, (error, result) => (error) ? reject(error) : resolve(result)]);
+		});
+	};
+}
 
 const randomBytesAsync = promisify(crypto.randomBytes);
 
