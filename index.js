@@ -1,5 +1,5 @@
 'use strict';
-const crypto = require('crypto');
+const randomBytes = require('randombytes');
 
 function promisify(fun) {
 	return function (...args) {
@@ -9,7 +9,7 @@ function promisify(fun) {
 	};
 }
 
-const randomBytesAsync = promisify(crypto.randomBytes);
+const randomBytesAsync = promisify(randomBytes);
 
 const urlSafeCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~'.split('');
 const numericCharacters = '0123456789'.split('');
@@ -26,7 +26,7 @@ const generateForCustomCharacters = (length, characters) => {
 	let stringLength = 0;
 
 	while (stringLength < length) { // In case we had many bad values, which may happen for character sets of size above 0x8000 but close to it
-		const entropy = crypto.randomBytes(entropyLength);
+		const entropy = randomBytes(entropyLength);
 		let entropyPosition = 0;
 
 		while (entropyPosition < entropyLength && stringLength < length) {
@@ -71,7 +71,7 @@ const generateForCustomCharactersAsync = async (length, characters) => {
 	return string;
 };
 
-const generateRandomBytes = (byteLength, type, length) => crypto.randomBytes(byteLength).toString(type).slice(0, length);
+const generateRandomBytes = (byteLength, type, length) => randomBytes(byteLength).toString(type).slice(0, length);
 
 const generateRandomBytesAsync = async (byteLength, type, length) => {
 	const buffer = await randomBytesAsync(byteLength);
